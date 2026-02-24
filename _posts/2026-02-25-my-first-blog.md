@@ -1,6 +1,6 @@
 ---
-layout: default
-title: "[随笔]  测试"
+layout: post
+title: 测试
 date: 2026-02-25
 ---
 
