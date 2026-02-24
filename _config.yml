@@ -1,0 +1,6 @@
+remote_theme: pages-themes/minimal@v0.2.0
+plugins:
+- jekyll-remote-theme
+title: pneuma717's blog
+description: A Dream of the Future 
+show_downloads: true
