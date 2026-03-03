@@ -1,0 +1,134 @@
+---
+layout: post
+title: 基于 VS Code Remote Settings 实现反代
+date: 2026-03-02
+author: pneuma
+tag: 投喂可爱服务器喵!
+---
+
+本文介绍如何通过 SSH 反向端口转发, 以应对服务器上可能存在的网络限制.
+
+> 更便捷的接入部分 AI 服务, 如 Claude Code 等.
+
+## 设备配置详情
+
+- **设备**：腾讯云轻量应用服务器(特惠型实例)
+- **系统**：Debian 12.13
+- **CPU**：4 核
+- **内存**：4 GB
+- **存储**：40 GB SSD
+
+> ~~相较2核&2GB, 4核4GB内存可以显著缓解服务器暴毙现象, 也是最终选择腾讯云的原因.~~
+>
+> ~~不过有一说一, 续费辣是真的贵~~
+
+## 背景
+
+- 不愿在服务器使用代理如 mihomo 等
+    - 节点不够稳定, 需要定期更换.
+    - 错误配置会造成 SSH 高延迟.
+- 满足编程时使用 Claude Code 等模型的需求
+- 便于运行脚本时使用 API 服务, 如 OpenRouter 等
+
+## 核心原理
+
+- 利用 SSH 反向端口转发, 将服务器上的端口映射到本地
+    - 让服务器监听内部端口, 如 `10000`;
+    - 发往本地端口 `10000` 的请求通过 SSH 隧道传回本地电脑的代理端口;
+    - 本地代理软件代为访问外网.
+- 常见代理软件端口
+    - Clash: `7890`
+    - V2rayN: `10800`
+    - 一般可自定义, 具体需在软件查看.
+- 多台本地电脑连接同一服务器
+    - 服务器端： 固定监听 `10000` 端口;
+    - 本地端： 在 SSH 配置中, 映射到实际代理端口;
+    - 通过这种方式, 服务器配置静态, 无需修改.
+
+## 步骤
+
+### 配置服务器的 Remote Settings
+
+> 让 VS Code 的远程终端自动走 `127.0.0.1:10000` 代理
+
+1. 在 VS Code 中连接远程服务器
+2. `> Preferences: Open Remote Settings (JSON)`
+3. 添加以下配置
+
+```json
+{
+    "terminal.integrated.env.linux": {
+        "http_proxy": "http://127.0.0.1:10000",
+        "https_proxy": "http://127.0.0.1:10000",
+        "all_proxy": "socks5://127.0.0.1:10000"
+    }
+}
+```
+
+4. `> Developer: Reload Window`
+
+### 配置本地电脑的 `.ssh/config`
+
+1. 打开本地电脑的 `.ssh/config` 文件
+   - Windows: `%USERPROFILE%\.ssh\config`
+   - Linux/Mac: `~/.ssh/config`
+2. 添加以下配置
+
+```txt
+    RemoteForward 10000 127.0.0.1:10808
+```
+
+> 这里以本地为 V2rayN 客户端, 代理端口为 `10808` 为例;
+>
+> 需保证缩进对齐, 完整的配置示例如下:
+
+```txt
+Host xxxx
+    HostName xxx.xxx.xxx.xxx
+    User root
+    RemoteForward 10000 127.0.0.1:10808
+```
+
+3. 特别地, 如使用 Linux/Mac 系统, 并使用私钥, 需要修复权限.
+
+```bash
+chmod 600 ~/.ssh/id_ed25519
+```
+
+### 测试
+
+1. 确保本地代理设置正确, 并启动
+2. 连接服务器(使用VS Code)
+    - 因为配置了 Remote Settings, 所以在 VS Code 中连接服务器时, 会自动走代理.
+    - 直接在终端使用 `ssh xxxx` 连接服务器时, 不会走代理.
+3. 使用 `curl` 测试
+
+```bash
+curl -I https://www.google.com
+curl -I https://api.anthropic.com
+```
+
+> 不能使用 `ping` 测试, 因为 `ping` 是 ICMP 协议, 而不是 HTTP 协议.
+
+## 下一步
+
+安装 Claude Code
+
+```bash
+npm install -g @anthropic-ai/claude-code
+```
+
+> 可能会遇到 `EACCES: permission denied` 错误
+> 
+> 需要 `sudo` 权限, 使用 `sudo npm install -g @anthropic-ai/claude-code`
+>
+> 更优雅地, 修改 npm 默认全局路径至用户目录.
+
+```bash
+mkdir ~/.npm-global
+npm config set prefix '~/.npm-global'
+export PATH=~/.npm-global/bin:$PATH
+npm install -g @anthropic-ai/claude-code
+```
+
+以上.
