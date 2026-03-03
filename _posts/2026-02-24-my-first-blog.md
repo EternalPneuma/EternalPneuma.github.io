@@ -2,9 +2,8 @@
 layout: post
 title: 测试
 date: 2026-02-24
+author: Gemini
 ---
-
-# Minimal Theme 适配测试
 
 这是一份用于测试 **GitHub Pages** 与 _Minimal Theme_ 的文档，覆盖常见 Markdown 格式、内联样式、列表、表格、代码块、引用、图片与 HTML 混排等情况。  
 当前时间：2026-02-24。链接示例：[GitHub Pages](https://pages.github.com)。
