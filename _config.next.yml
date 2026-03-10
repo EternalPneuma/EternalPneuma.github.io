@@ -163,7 +163,7 @@ site_state: true
 # Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.
 social:
   GitHub: https://github.com/EternalPneuma || fab fa-github
-  E-Mail: pneuma717@gmail.com || fa fa-envelope
+  E-Mail: mailto:pneuma717@gmail.com || fa fa-envelope
   #Weibo: https://weibo.com/yourname || fab fa-weibo
   #Twitter: https://twitter.com/yourname || fab fa-twitter
   #FB Page: https://www.facebook.com/yourname || fab fa-facebook
@@ -434,10 +434,10 @@ github_banner:
 # ---------------------------------------------------------------
 
 font:
-  enable: false
+  enable: true
 
   # Uri of fonts host, e.g. https://fonts.googleapis.com (Default).
-  host:
+  host: https://fonts.loli.net
 
   # Font options:
   # `external: true` will load this font family from `host` above.
@@ -447,25 +447,25 @@ font:
   # Global font settings used for all elements inside <body>.
   global:
     external: true
-    family: Lato
+    family: Noto Serif SC
     size:
 
   # Font settings for site title (.site-title).
   title:
     external: true
-    family:
+    family: Noto Serif SC
     size:
 
   # Font settings for headlines (<h1> to <h6>).
   headings:
     external: true
-    family:
+    family: Noto Serif SC
     size:
 
   # Font settings for posts (.post-body).
   posts:
     external: true
-    family:
+    family: Noto Serif SC
 
   # Font settings for <code> and code blocks.
   codes:

@@ -1,58 +1,237 @@
-.tag-cloud-tags {
-  margin-top: 60px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
+// ================================================================
+// JYF's Blog — Refined Aesthetic Styles
+// 笔墨 · 游记 · 克制之美
+// ================================================================
 
-.tag-cloud-tags a {
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-  
-  width: 100px;
-  height: 100px;
-  
-  background: #f9f9f9;
-  border-radius: 20px;
-  
-  font-size: 18px !important;
-  color: #333 !important;
-  font-weight: 600;
-  
-  border-bottom: none !important;
-  text-decoration: none;
-  
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-  transition: all 0.3s ease;
-}
 
-.tag-cloud-tags a small, 
-.tag-cloud-tags a span {
-  display: none !important;
-}
+// ----------------------------------------------------------------
+// 1. Post Body — 阅读节奏
+// ----------------------------------------------------------------
 
-.tag-cloud-tags a:hover {
-  background: #222;
-  color: #fff !important;
-  transform: translateY(-8px);
-  box-shadow: 0 12px 20px rgba(0,0,0,0.15);
-}
+.post-body
+  line-height: 1.95
+  letter-spacing: 0.02em
 
-.post-button .btn {
-  background: #fff;
-  color: #555;
-  border: 2px solid #555
-  border-radius: 10px;
-  padding: 5px 20px;
-  transition: all 0.3s;
-}
+// ----------------------------------------------------------------
+// 2. Headings — 章节结构
+// ----------------------------------------------------------------
 
-.post-button .btn:hover {
-  background: #222;
-  color: #fff;
-  border-color: #222;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
+.post-body h1,
+.post-body h2,
+.post-body h3,
+.post-body h4,
+.post-body h5,
+.post-body h6
+  letter-spacing: 0.04em
+
+// h2 作为章节分隔线，带墨色底边
+.post-body h2
+  padding-bottom: 0.45em
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+
+@media (prefers-color-scheme: dark)
+  .post-body h2
+    border-bottom-color: rgba(255, 255, 255, 0.1)
+
+// ----------------------------------------------------------------
+// 3. Blockquotes — 文学批注
+// ----------------------------------------------------------------
+
+.post-body blockquote
+  position: relative
+  margin: 2em 0
+  padding: 1.1em 1.6em
+  border-left: 3px solid #c9a96e
+  background: rgba(201, 169, 110, 0.06)
+  border-radius: 0 8px 8px 0
+  font-style: normal
+
+  p
+    margin: 0
+    line-height: 1.9
+
+@media (prefers-color-scheme: dark)
+  .post-body blockquote
+    border-left-color: #8a6a3a
+    background: rgba(138, 106, 58, 0.1)
+
+// ----------------------------------------------------------------
+// 4. Horizontal Rules — 笔墨分隔
+// ----------------------------------------------------------------
+
+.post-body hr
+  border: none
+  margin: 3em auto
+  width: 60%
+  height: 1px
+  background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.18), transparent)
+
+@media (prefers-color-scheme: dark)
+  .post-body hr
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.15), transparent)
+
+// ----------------------------------------------------------------
+// 5. Images — 画框质感
+// ----------------------------------------------------------------
+
+.post-body img
+  border-radius: 6px
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08)
+  transition: box-shadow 0.3s ease
+
+.post-body img:hover
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15)
+
+@media (prefers-color-scheme: dark)
+  .post-body img:hover
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5)
+
+// ----------------------------------------------------------------
+// 6. Tables — 整洁排版
+// ----------------------------------------------------------------
+
+.post-body table
+  border-collapse: collapse
+  width: 100%
+  margin: 1.6em 0
+  font-size: 0.95em
+
+.post-body table th
+  background: rgba(0, 0, 0, 0.04)
+  font-weight: 700
+  letter-spacing: 0.04em
+
+.post-body table th,
+.post-body table td
+  padding: 0.7em 1.1em
+  border: 1px solid rgba(0, 0, 0, 0.1)
+
+@media (prefers-color-scheme: dark)
+  .post-body table th
+    background: rgba(255, 255, 255, 0.06)
+
+  .post-body table th,
+  .post-body table td
+    border-color: rgba(255, 255, 255, 0.1)
+
+// ----------------------------------------------------------------
+// 7. Tag Cloud — 墨格标牌
+// ----------------------------------------------------------------
+
+.tag-cloud-tags
+  margin-top: 60px
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
+  gap: 16px
+
+.tag-cloud-tags a
+  display: flex !important
+  align-items: center
+  justify-content: center
+
+  width: 96px
+  height: 96px
+
+  background: #fafaf8
+  border: 1px solid rgba(0, 0, 0, 0.07)
+  border-radius: 18px
+
+  font-size: 15px !important
+  font-weight: 600
+  color: #3a3a3a !important
+  letter-spacing: 0.05em
+
+  border-bottom: none !important
+  text-decoration: none
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.8)
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)
+
+.tag-cloud-tags a small,
+.tag-cloud-tags a span
+  display: none !important
+
+.tag-cloud-tags a:hover
+  background: #2a2a2a
+  color: #f0ede8 !important
+  transform: translateY(-7px) scale(1.04)
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.18), 0 4px 8px rgba(0, 0, 0, 0.1)
+  border-color: transparent
+
+@media (prefers-color-scheme: dark)
+  .tag-cloud-tags a
+    background: rgba(255, 255, 255, 0.04)
+    border-color: rgba(255, 255, 255, 0.09)
+    color: #c8c4bc !important
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.04)
+
+  .tag-cloud-tags a:hover
+    background: rgba(255, 255, 255, 0.12)
+    color: #f0ede8 !important
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.4)
+
+// ----------------------------------------------------------------
+// 8. Post Button — 低调邀请
+// ----------------------------------------------------------------
+
+.post-button .btn
+  display: inline-block
+  background: transparent
+  color: #555
+  border: 1.5px solid rgba(0, 0, 0, 0.2)
+  border-radius: 999px
+  padding: 7px 32px
+  font-size: 13px
+  letter-spacing: 0.12em
+  transition: all 0.28s ease
+
+.post-button .btn:hover
+  background: #2a2a2a
+  color: #f0ede8
+  border-color: #2a2a2a
+  transform: translateY(-2px)
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14)
+
+@media (prefers-color-scheme: dark)
+  .post-button .btn
+    color: #aaa
+    border-color: rgba(255, 255, 255, 0.2)
+
+  .post-button .btn:hover
+    background: rgba(255, 255, 255, 0.12)
+    color: #f0ede8
+    border-color: rgba(255, 255, 255, 0.35)
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35)
+
+// ----------------------------------------------------------------
+// 9. Sidebar TOC — 章节导航
+// ----------------------------------------------------------------
+
+.sidebar-inner .post-toc
+  font-size: 13px
+
+.sidebar-inner .post-toc .toc-link
+  border-bottom: none
+  opacity: 0.6
+  transition: opacity 0.2s ease, padding-left 0.2s ease
+
+.sidebar-inner .post-toc .toc-link:hover
+  opacity: 1
+  padding-left: 4px
+
+.sidebar-inner .post-toc .toc-link.active
+  opacity: 1
+  font-weight: 600
+
+// ----------------------------------------------------------------
+// 10. Selection Highlight — 朱砂批注
+// ----------------------------------------------------------------
+
+::selection
+  background: rgba(201, 169, 110, 0.28)
+  color: inherit
+
+@media (prefers-color-scheme: dark)
+  ::selection
+    background: rgba(138, 106, 58, 0.45)
