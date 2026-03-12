@@ -1,0 +1,12 @@
+<script>
+(function () {
+  // Force dark mode permanently — runs synchronously in <head> before paint.
+  // Sets both the DOM attribute and localStorage so NexT's own darkmode
+  // initialisation script also reads 'dark' on subsequent page loads.
+  document.documentElement.setAttribute('data-theme', 'dark');
+  try {
+    localStorage.setItem('colorscheme', 'dark'); // NexT 8 key
+    localStorage.setItem('theme', 'dark');        // fallback
+  } catch (e) {}
+})();
+</script>
