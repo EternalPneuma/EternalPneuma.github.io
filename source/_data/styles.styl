@@ -3,14 +3,92 @@
 // 笔墨 · 游记 · 克制之美
 // ================================================================
 
+// ----------------------------------------------------------------
+// 0. Fonts — 本地 PingFang 字体
+// ----------------------------------------------------------------
+// 字体文件位于：source/fonts/
+// 构建后可通过 /fonts/<file> 访问
+
+@font-face
+  font-family: "PingFang"
+  src: url("/fonts/PingFang-ExtraLight.ttf") format("truetype")
+  font-weight: 200
+  font-style: normal
+  font-display: swap
+
+@font-face
+  font-family: "PingFang"
+  src: url("/fonts/PingFang-Light.ttf") format("truetype")
+  font-weight: 300
+  font-style: normal
+  font-display: swap
+
+@font-face
+  font-family: "PingFang"
+  src: url("/fonts/PingFang-Regular.ttf") format("truetype")
+  font-weight: 400
+  font-style: normal
+  font-display: swap
+
+@font-face
+  font-family: "PingFang"
+  src: url("/fonts/PingFang-Medium.ttf") format("truetype")
+  font-weight: 500
+  font-style: normal
+  font-display: swap
+
+@font-face
+  font-family: "PingFang"
+  src: url("/fonts/PingFang-Bold.ttf") format("truetype")
+  font-weight: 700
+  font-style: normal
+  font-display: swap
+
+@font-face
+  font-family: "PingFang"
+  src: url("/fonts/PingFang-Heavy.ttf") format("truetype")
+  font-weight: 800
+  font-style: normal
+  font-display: swap
+
+
+// ----------------------------------------------------------------
+// 0.1 Pill System — 统一胶囊风格（导航/阅读全文/Tag）
+// ----------------------------------------------------------------
+
+jyf-pill-base()
+  display: inline-flex !important
+  align-items: center
+  justify-content: center
+  padding: var(--jyf-pill-padding-y) var(--jyf-pill-padding-x)
+  min-height: var(--jyf-pill-min-height)
+  border-radius: 999px
+  border: 1px solid var(--jyf-pill-border)
+  box-sizing: border-box
+  background: var(--jyf-pill-bg)
+  color: var(--jyf-pill-text) !important
+  text-decoration: none
+  border-bottom: none !important
+  font-weight: 700
+  letter-spacing: 0.10em
+  box-shadow: var(--jyf-card-shadow-soft), var(--jyf-card-highlight-soft)
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, color 0.2s ease
+  transform: translateZ(0)
+
+jyf-pill-hover()
+  background: var(--jyf-pill-bg-hover)
+  border-color: var(--jyf-pill-border-hover)
+  color: var(--jyf-pill-text-hover) !important
+  box-shadow: var(--jyf-card-shadow), var(--jyf-card-highlight)
+  transform: translateY(-2px)
 
 // ----------------------------------------------------------------
 // 1. Post Body — 阅读节奏
-// ----------------------------------------------------------------
 
 .post-body
   line-height: 1.95
   letter-spacing: 0.02em
+  font-size: 0.95em
 
 // ----------------------------------------------------------------
 // 2. Headings — 章节结构
@@ -38,20 +116,22 @@ html[data-theme="dark"] .post-body h2
 
 .post-body blockquote
   position: relative
-  margin: 2em 0
-  padding: 1.1em 1.6em
-  border-left: 3px solid #5b9bd5
-  background: rgba(91, 155, 213, 0.06)
-  border-radius: 0 8px 8px 0
-  font-style: normal
+  margin: 2.5em 0
+  padding: 0.5em 0 0.5em 1.5em
+  border-left: 2px solid rgba(0, 0, 0, 0.15)
+  background: transparent
+  border-radius: 0
+  font-style: italic
+  color: rgba(0, 0, 0, 0.6)
 
   p
     margin: 0
     line-height: 1.9
 
 html[data-theme="dark"] .post-body blockquote
-  border-left-color: #3a6a9b
-  background: rgba(58, 106, 155, 0.1)
+  border-left-color: rgba(201, 169, 110, 0.45) // 暗金色的左边框
+  background: transparent
+  color: rgba(255, 255, 255, 0.5)
 
 // ----------------------------------------------------------------
 // 4. Horizontal Rules — 笔墨分隔
@@ -136,50 +216,19 @@ html[data-theme="dark"] .post-body table td
   justify-content: center
   gap: 16px
 
-.tag-cloud-tags a
-  display: flex !important
-  align-items: center
-  justify-content: center
-
-  width: 96px
-  height: 96px
-
-  background: #fafaf8
-  border: 1px solid rgba(0, 0, 0, 0.07)
-  border-radius: 18px
-
-  font-size: 15px !important
-  font-weight: 600
-  color: #3a3a3a !important
-  letter-spacing: 0.05em
-
-  border-bottom: none !important
-  text-decoration: none
-
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.8)
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)
+html[data-theme="dark"] .tag-cloud-tags a
+  // 统一胶囊风格（与导航/阅读全文一致）
+  font-size: 14px !important
+  jyf-pill-base()
 
 .tag-cloud-tags a small,
 .tag-cloud-tags a span
   display: none !important
 
-.tag-cloud-tags a:hover
-  background: #2a2a2a
-  color: #f0ede8 !important
-  transform: translateY(-7px) scale(1.04)
-  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.18), 0 4px 8px rgba(0, 0, 0, 0.1)
-  border-color: transparent
-
-html[data-theme="dark"] .tag-cloud-tags a
-  background: rgba(255, 255, 255, 0.04)
-  border-color: rgba(255, 255, 255, 0.09)
-  color: #e0ddd8 !important
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.04)
-
 html[data-theme="dark"] .tag-cloud-tags a:hover
-  background: rgba(255, 255, 255, 0.12)
-  color: #f0ede8 !important
-  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.4)
+  jyf-pill-hover()
+
+// dark 模式下由上面的变量控制胶囊颜色，这里不再单独分叉
 
 // ----------------------------------------------------------------
 // 8. Post Button — 低调邀请
@@ -192,6 +241,9 @@ html[data-theme="dark"] .tag-cloud-tags a:hover
   border: 1.5px solid rgba(0, 0, 0, 0.2)
   border-radius: 999px
   padding: 7px 32px
+  width: 138px
+  text-align: center
+  box-sizing: border-box
   font-size: 13px
   letter-spacing: 0.12em
   transition: all 0.28s ease
@@ -204,14 +256,11 @@ html[data-theme="dark"] .tag-cloud-tags a:hover
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14)
 
 html[data-theme="dark"] .post-button .btn
-  color: #ccc
-  border-color: rgba(255, 255, 255, 0.2)
+  // 统一胶囊风格（与导航/Tag 一致）
+  jyf-pill-base()
 
 html[data-theme="dark"] .post-button .btn:hover
-  background: rgba(255, 255, 255, 0.12)
-  color: #f0ede8
-  border-color: rgba(255, 255, 255, 0.35)
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35)
+  jyf-pill-hover()
 
 // ----------------------------------------------------------------
 // 9. Sidebar TOC — 章节导航
@@ -252,15 +301,198 @@ html[data-theme="dark"] ::selection
 
 html[data-theme="dark"]
   --body-bg-color: #050505
-  --content-bg-color: #0f0f0f
-  --card-bg-color: #161616
-  --navbar-bg-color: #000000
-  --sidebar-bg-color: #090909
+  --content-bg-color: transparent
+  --card-bg-color: rgba(22, 22, 22, 0.65) // 半透明卡片背景以配合毛玻璃
+  --navbar-bg-color: rgba(0, 0, 0, 0.65)
+  --sidebar-bg-color: rgba(9, 9, 9, 0.65)
   --border-color: rgba(255, 255, 255, 0.06)
-  --text-color: #e8e8e8
+  // 正文：略带灰度（非纯白）
+  --text-color: #cfcfcf
   --link-color: #c8c4bc
   --link-hover-color: #f0f0f0
+  --jyf-radius: 18px
+  // 收敛阴影，变得更柔和
+  --jyf-card-shadow: 0 10px 30px rgba(0, 0, 0, 0.40)
+  --jyf-card-shadow-soft: 0 4px 15px rgba(0, 0, 0, 0.25)
+  --jyf-card-border: 1px solid rgba(255, 255, 255, 0.06)
+  // 高光描边（卡片顶部轻微高光 + 细描边，增强“玻璃/金属”质感）
+  --jyf-card-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.10), inset 0 0 0 1px rgba(255, 255, 255, 0.07)
+  --jyf-card-highlight-soft: inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 0 0 1px rgba(255, 255, 255, 0.05)
+  // 统一胶囊（导航/阅读全文/Tag）
+  --jyf-pill-bg: rgba(255, 255, 255, 0.06)
+  --jyf-pill-bg-hover: rgba(255, 255, 255, 0.14)
+  --jyf-pill-border: rgba(255, 255, 255, 0.12)
+  --jyf-pill-border-hover: rgba(255, 255, 255, 0.18)
+  --jyf-pill-text: rgba(255, 255, 255, 0.88)
+  --jyf-pill-text-hover: #ffffff
+  --jyf-pill-min-height: 36px
+  --jyf-pill-padding-y: 8px
+  --jyf-pill-padding-x: 16px
 
+// 标题：纯白 + 加粗
+html[data-theme="dark"] .site-title,
+html[data-theme="dark"] .site-subtitle,
+html[data-theme="dark"] .post-title,
+html[data-theme="dark"] .post-title a,
+html[data-theme="dark"] .post-title-link,
+html[data-theme="dark"] .post-body h1,
+html[data-theme="dark"] .post-body h2,
+html[data-theme="dark"] .post-body h3,
+html[data-theme="dark"] .post-body h4,
+html[data-theme="dark"] .post-body h5,
+html[data-theme="dark"] .post-body h6
+  color: #ffffff !important
+  font-weight: 800
+
+// 正文：灰白；但加粗正文（strong/b）要恢复为纯白
+html[data-theme="dark"] body,
+html[data-theme="dark"] .post-body,
+html[data-theme="dark"] .post-content,
+html[data-theme="dark"] .post-excerpt
+  color: #cfcfcf !important
+
+html[data-theme="dark"] .post-body strong,
+html[data-theme="dark"] .post-body b,
+html[data-theme="dark"] .post-content strong,
+html[data-theme="dark"] .post-content b,
+html[data-theme="dark"] .post-excerpt strong,
+html[data-theme="dark"] .post-excerpt b
+  color: #ffffff !important
+  font-weight: 800 !important
+
+// 卡片/容器统一圆角 + 阴影（Gemini：post-block / pagination / comments 等）
+html[data-theme="dark"] .post-block,
+html[data-theme="dark"] .pagination,
+html[data-theme="dark"] .tabs-comment,
+html[data-theme="dark"] .comments,
+html[data-theme="dark"] .main-inner > .comments,
+html[data-theme="dark"] .comment-position .comments,
+html[data-theme="dark"] .sub-menu
+  border-radius: var(--jyf-radius) !important
+  overflow: hidden
+  box-shadow: var(--jyf-card-shadow), var(--jyf-card-highlight)
+  background: var(--card-bg-color) !important
+  border: var(--jyf-card-border)
+  backdrop-filter: blur(12px)
+  -webkit-backdrop-filter: blur(12px)
+
+// main-inner 本身不裁切，避免只出现“第一篇圆角”的错觉
+html[data-theme="dark"] .main-inner
+  overflow: visible
+
+// 侧边栏整体也统一为“卡片容器”风格
+html[data-theme="dark"] .sidebar-inner
+  border-radius: var(--jyf-radius)
+  overflow: hidden
+  box-shadow: var(--jyf-card-shadow), var(--jyf-card-highlight)
+  background: var(--card-bg-color)
+  border: var(--jyf-card-border)
+  backdrop-filter: blur(12px)
+  -webkit-backdrop-filter: blur(12px)
+
+// 侧边栏头像图片圆角（与卡片风格一致）
+html[data-theme="dark"] .site-author-image
+  border-radius: var(--jyf-radius) !important
+  overflow: hidden
+  box-shadow: var(--jyf-card-shadow-soft), var(--jyf-card-highlight-soft)
+
+// 顶部主菜单（你贴的 <ul class="main-menu menu">）
+// 默认是透明/行内样式，所以需要单独加圆角矩形“胶囊/卡片”风格
+html[data-theme="dark"] .main-menu
+  border-radius: var(--jyf-radius)
+  // 不裁切内部胶囊的 hover 上浮/阴影
+  overflow: visible
+  box-shadow: var(--jyf-card-shadow-soft), var(--jyf-card-highlight-soft)
+  background: var(--card-bg-color)
+  border: var(--jyf-card-border)
+  backdrop-filter: blur(12px)
+  -webkit-backdrop-filter: blur(12px)
+  padding: 14px 16px 16px
+  margin: 0
+
+html[data-theme="dark"] .main-menu .menu-item
+  border-radius: 0
+  margin: 0 10px
+
+// 让导航菜单与下方内容之间更“呼吸感”（回退之前的 margin-top 方案）
+html[data-theme="dark"] .site-nav
+  margin-top: 0
+  margin-bottom: 18px
+
+// NexT 默认会给 .menu-item(li) 在 hover/active 时加矩形背景，可能导致移出时闪一下矩形。
+// 这里把 li 的背景高亮禁用，统一由 a 元素的胶囊样式负责。
+html[data-theme="dark"] .main-menu .menu-item,
+html[data-theme="dark"] .main-menu .menu-item:hover,
+html[data-theme="dark"] .main-menu .menu-item.menu-item-active
+  background: transparent !important
+
+// 给菜单链接一个“稳定的胶囊基线样式”，避免 hover/active 时因为 border/padding 变化导致抖动或闪烁
+html[data-theme="dark"] .main-menu .menu-item > a
+  // 统一胶囊风格（与阅读全文/Tag 一致）
+  jyf-pill-base()
+
+// 顶部菜单：移除标签后的数量徽标（<span class="badge">7</span>）
+html[data-theme="dark"] .main-menu .badge
+  display: none !important
+
+// 顶部菜单胶囊：统一等宽（桌面端更美观）
+@media (min-width: 768px)
+  html[data-theme="dark"] .main-menu
+    display: flex
+    justify-content: center
+    flex-wrap: wrap
+    gap: 14px
+
+  html[data-theme="dark"] .main-menu .menu-item
+    // 使用 gap 控制间距，避免 hover 上浮时看起来“挤”
+    margin: 0
+
+  html[data-theme="dark"] .main-menu .menu-item > a
+    width: 138px
+
+// 顶部菜单当前激活项（你贴的 <a class="menu-item-active">）
+html[data-theme="dark"] .menu a.menu-item-active,
+html[data-theme="dark"] .menu .menu-item-active > a
+  background: rgba(255, 255, 255, 0.12)
+  border-color: rgba(255, 255, 255, 0.18)
+  box-shadow: var(--jyf-card-shadow-soft), var(--jyf-card-highlight-soft)
+
+// 顶部菜单 hover 高亮也保持胶囊圆角（修复 hover 仍是矩形的问题）
+html[data-theme="dark"] .main-menu .menu-item > a:hover,
+html[data-theme="dark"] .main-menu .menu-item > a:focus,
+html[data-theme="dark"] .main-menu .menu-item > a:active
+  jyf-pill-hover()
+
+// 鼠标在 li 范围内（刚移出 a 的瞬间）也保持同样高亮，消除“退出时矩形闪一下/抖动”
+html[data-theme="dark"] .main-menu .menu-item:hover > a
+  jyf-pill-hover()
+
+// 当前激活项 hover 稍微更亮一些
+html[data-theme="dark"] .menu a.menu-item-active:hover,
+html[data-theme="dark"] .menu .menu-item-active > a:hover
+  jyf-pill-hover()
+
+// 站点 Logo 图片（你贴的 <img class="custom-logo-image">）
+html[data-theme="dark"] .custom-logo-image
+  border-radius: var(--jyf-radius)
+  overflow: hidden
+  box-shadow: var(--jyf-card-shadow-soft), var(--jyf-card-highlight-soft)
+  border: var(--jyf-card-border)
+
+// 站点搜索弹窗：统一圆角 + 阴影 + 背景
+html[data-theme="dark"] .search-popup
+  border-radius: var(--jyf-radius) !important
+  overflow: hidden
+  box-shadow: var(--jyf-card-shadow), var(--jyf-card-highlight)
+  background: var(--card-bg-color) !important
+  border: var(--jyf-card-border)
+
+html[data-theme="dark"] .search-popup .search-header
+  background: rgba(255, 255, 255, 0.06) !important
+  border-top-left-radius: var(--jyf-radius) !important
+  border-top-right-radius: var(--jyf-radius) !important
+
+// Footer 签名：talk is cheap
 // ----------------------------------------------------------------
 // 12. Dark Mode Code — 代码高亮修正
 // ----------------------------------------------------------------
@@ -276,16 +508,48 @@ html[data-theme="dark"] .code-container
   color: #e8e8e8
 
 // ----------------------------------------------------------------
-// 13. Sidebar Nav Active — 蓝色导航高亮
+// 13. Sidebar Nav Active — 暗金导航高亮
 // ----------------------------------------------------------------
 
 .sidebar-toc-active .sidebar-nav-toc,
 .sidebar-overview-active .sidebar-nav-overview
-  border-bottom-color: #4da6ff !important
-  color: #4da6ff !important
+  border-bottom-color: #c9a96e !important
+  color: #c9a96e !important
 
 .post-toc .nav .active > a,
 .post-toc .nav .active-current > a
-  border-bottom-color: #4da6ff !important
-  color: #4da6ff !important
+  border-bottom-color: #c9a96e !important
+  color: #c9a96e !important
 
+// ----------------------------------------------------------------
+// 14. Smooth Animations — 丝滑浮现动效
+// ----------------------------------------------------------------
+
+@keyframes smoothFadeInUp
+  0%
+    opacity: 0
+    transform: translateY(20px)
+  100%
+    opacity: 1
+    transform: translateY(0)
+
+.post-block, .comments, .sidebar-inner, .main-menu
+  animation: smoothFadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both
+
+// ----------------------------------------------------------------
+// 15. Global UX — 隐藏滚动条与极简噪点
+// ----------------------------------------------------------------
+
+// 隐藏滚动条
+::-webkit-scrollbar
+  width: 0px
+  height: 0px
+  background: transparent
+
+*
+  scrollbar-width: none
+
+// 极简噪点 (暗黑模式下，SVG 噪点降低透明度，避免干扰雪花特效)
+html[data-theme="dark"] body
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E")
+  background-attachment: fixed

@@ -4,12 +4,12 @@
 
 # Site
 title: JYF's Blog
-subtitle: ''
+subtitle: 'Talk is Cheap'
 description: ''
 keywords:
 author: Jiang Yifeng
 language: zh-CN
-timezone: ''
+timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
@@ -41,9 +41,16 @@ external_link:
 filename_case: 0
 render_drafts: false
 post_asset_folder: true
-marked:
-  prependRoot: true
-  postAsset: true
+markdown:
+  preset: 'default'
+  render:
+    html: true
+    breaks: false
+  plugins:
+    - markdown-it-footnote
+  images:
+    prepend_root: true
+    post_asset: true
 relative_link: false
 future: true
 syntax_highlighter: highlight.js

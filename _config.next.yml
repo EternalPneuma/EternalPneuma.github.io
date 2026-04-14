@@ -58,14 +58,14 @@ lightdark:
 # ---------------------------------------------------------------
 
 favicon:
-  small: blog-icon.png
-  medium: blog-icon.png
-  apple_touch_icon: blog-icon.png
-  safari_pinned_tab: blog-icon.png
+  small: blog_icon.svg
+  medium: blog_icon.svg
+  apple_touch_icon: blog_icon.svg
+  safari_pinned_tab: blog_icon.svg
   #android_manifest: /manifest.json
 
 # Custom Logo (Warning: Do not support scheme Mist)
-custom_logo: 八方旅人.jpg
+custom_logo: dog.png
 
 # Creative Commons 4.0 International License.
 # See: https://creativecommons.org/about/cclicenses/
@@ -219,7 +219,7 @@ footer:
     # If you want to animate the icon, set it to true.
     animated: true
     # Change the color of icon, using Hex Code.
-    color: "#66ccff"
+    color: "#c9a96e"
 
   # If not defined, `author` from Hexo `_config.yml` will be used.
   # Set to `false` to disable the copyright statement.
@@ -403,7 +403,7 @@ reading_progress:
   # Available values: top | bottom
   position: top
   reversed: false
-  color: "#37c6c0"
+  color: "#c9a96e"
   height: 3px
 
 # Bookmark Support
@@ -446,26 +446,26 @@ font:
 
   # Global font settings used for all elements inside <body>.
   global:
-    external: true
-    family: Noto Serif SC
+    external: false
+    family: PingFang
     size:
 
   # Font settings for site title (.site-title).
   title:
-    external: true
-    family: Noto Serif SC
+    external: false
+    family: PingFang
     size:
 
   # Font settings for headlines (<h1> to <h6>).
   headings:
-    external: true
-    family: Noto Serif SC
+    external: false
+    family: PingFang
     size:
 
   # Font settings for posts (.post-body).
   posts:
-    external: true
-    family: Noto Serif SC
+    external: false
+    family: PingFang
 
   # Font settings for <code> and code blocks.
   codes:
@@ -597,7 +597,7 @@ fancybox: false
 # Medium Zoom is a JavaScript library for zooming images like Medium.
 # Warning: Do not enable both `fancybox` and `mediumzoom`.
 # For more information: https://medium-zoom.francoischalifour.com
-mediumzoom: false
+mediumzoom: true
 
 # Vanilla JavaScript plugin for lazyloading images.
 # For more information: https://apoorv.pro/lozad.js/demo/
@@ -634,7 +634,7 @@ quicklink:
 # Use Animate.css to animate everything.
 # For more information: https://animate.style
 motion:
-  enable: true
+  enable: false
   async: false
   duration: 50
   transition:
@@ -768,7 +768,8 @@ addtoany:
 # Google Analytics
 # See: https://analytics.google.com
 google_analytics:
-  tracking_id: G-4VWYK5HQ0M
+  # 留空表示关闭 Google Analytics（GA4）
+  tracking_id:
   # By default, NexT will load an external gtag.js script on your site.
   # If you only need the pageview feature, set the following option to true to get a better performance.
   only_pageview: false
